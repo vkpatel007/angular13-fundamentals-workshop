@@ -12,5 +12,9 @@ export class AppComponent {
     { path: '/courses', icon: 'view_list', title: 'Courses' },
   ];
 
+  examples = [
+    {path: '/examples/child',icon:'face',title: 'Child Routes'}
+  ]
+
   constructor() {}
 }

@@ -1,11 +1,31 @@
 {
   "courses": [
     {
-      "id": 1,
-      "title": "Angular 13 Fundamentals",
+      "id": "1",
+      "title": "hello",
       "description": "Learn the fundamentals of Angular 13",
       "percentComplete": 26,
       "favorite": true
+    },
+    {
+      "id": "_tAqkmY",
+      "title": "new course",
+      "description": "hello",
+      "percentComplete": 29,
+      "favorite": true
+    },
+    {
+      "id": "WjYyJvk",
+      "title": "asdf",
+      "description": "aasdf",
+      "percentComplete": 0,
+      "favorite": false
+    }
+  ],
+  "lessons": [
+    {
+      "id": "1",
+      "title": "component driven arcitecture"
     }
   ]
 }
