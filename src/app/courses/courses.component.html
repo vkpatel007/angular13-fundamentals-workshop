@@ -7,9 +7,28 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-
-            <!-- COURSES LIST -->
-
+          <!-- <ul>
+            <li *ngFor="let course of courses" (click)="selectCourse(course)"><pre>{{course.title}}</pre></li>
+          </ul> -->
+          <mat-list>
+            <mat-list-item
+              *ngFor="let course of courses"
+              (click)="selectCourse(course)"
+            >
+              <h3 matLine>{{ course.title | titlecase }}</h3>
+              <p matLine>
+                {{ course.description }}
+              </p>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteCourse(course.id);$event.stopImmediatePropagation() "
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+          
         </mat-card-content>
         </mat-card>
     </div>
@@ -18,19 +37,65 @@
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
-                    Select Course
+                  <span *ngIf="selectedCourse?.id; else elseBlock">
+                    {{originalTitle | titlecase}}
+                  </span>
+                  <ng-template #elseBlock>Select a Course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-            
-            <!-- COURSE FORM -->
+            <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
 
-            </mat-card-content>
-            <mat-card-actions>
+              <mat-card-content>
+                <mat-form-field class="full-width">
+                  <input type="text"
+                  matInput
+                  placeholder="Title"
+                  [(ngModel)]="selectedCourse.title"
+                  name="title"
+                  required
+                  >
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input type="text"
+                  matInput
+                  placeholder="Description"
+                  [(ngModel)]="selectedCourse.description"
+                  name="description"
+                  required
+                  >
+                </mat-form-field>
+                <section class="full-width">
+                 <h4>{{selectedCourse.percentComplete}}% complete</h4>
+                  <mat-slider
+                  class="full-width"
+                  min="0"
+                  max="100"
+                  thumbLabel
+                  name="percentComplete"
+                  [(ngModel)]="selectedCourse.percentComplete"
+                  
+                  >
 
-            <!-- COURSE ACTIONS -->
+                  </mat-slider>
+                  
+                </section>
+               <section>
+                <mat-checkbox [(ngModel)]="selectedCourse.favorite" name="favorite">
+                  Favorite
 
-            </mat-card-actions>
+                </mat-checkbox>
+               </section>
+                
+              </mat-card-content>
+              <mat-card-actions>
+                <button type="submit" [disabled]="form.invalid" mat-button color="primary">Save</button>
+                <button type="button" mat-button (click)="reset()">cancel</button>
+                
+              </mat-card-actions>
+            </form>
+            <hr>
+            <pre>{{form.value | json}}</pre>
+            <pre>{{form.valid | json}}</pre>
         </mat-card>
     </div>
 </div>
